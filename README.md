@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HyperFlux 📁
 
-## Getting Started
+A modern, **secure** and **minimalistic** temporary file-sharing service built with **Next.js 14**, React and Tailwind CSS.  
+---
 
-First, run the development server:
+## ✨ Features
+
+| Category | Details |
+| -------- | ------- |
+| 🔒 **Security** | NextAuth-powered sign-in |
+| 📤 **Uploads** | Drag-and-drop UI with progress bar & chunked uploads |
+| 🔗 **Sharing Links** | Auto-expiring URLs (default 24 h – configurable) |
+| 📊 **Analytics** | Per-file download count |
+| 🌓 **Dark / Light Mode** | One-click theme toggle |
+| 📱 **Responsive** | Optimised for desktop, tablet and mobile |
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Choice | Notes |
+| ----- | ------ | ----- |
+| **Frontend** | Next.js 14 (App Router) | Fully type-safe with TypeScript |
+| **Styling** | Tailwind CSS&nbsp;+&nbsp;`shadcn/ui` |
+| **Backend** | Next.js API Routes |
+| **Database** | MySQL 8 + Prisma ORM | Single schema file |
+| **Auth** | NextAuth.js | JWT |
+| **Storage** | Local folder by default (`/app/uploads`) |
+
+---
+
+## 🔧 Environment Configuration
+
+Create a file named **`.env.local`** in the project root:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Database
+DATABASE_URL="mysql://file_user:your_secure_password@localhost:3306/file_share"
+
+# NextAuth
+NEXTAUTH_SECRET="your-very-secure-secret"
+NEXTAUTH_URL="http://localhost:3000"
+
+# Upload directory
+UPLOAD_DIR="/app/uploads"
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Getting Started
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# 1. Clone and install
+git clone https://github.com/riveerxd/HyperFlux
+cd HyperFlux
+npm install
 
-## Learn More
+# 2. Configure environment
+vim .env.local
 
-To learn more about Next.js, take a look at the following resources:
+# 3. Run Prisma migrations & generate types
+npx prisma migrate dev
+npx prisma generate
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# 4. Start the server
+npm run dev    # http://localhost:3000
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📦 Build & Deploy
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+TODO: add build & deploy instructions
+```bash
+npm build
+npm start
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+
+## 📝 License
+
+no licence yet
+
+---
