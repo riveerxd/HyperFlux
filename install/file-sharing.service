@@ -1,0 +1,29 @@
+[Unit]
+Description=File Sharing Application
+After=network.target mysql.service
+Wants=mysql.service
+
+[Service]
+Type=simple
+User=fileshare
+Group=fileshare
+WorkingDirectory=/opt/file-sharing
+Environment=NODE_ENV=production
+Environment=PATH=/usr/bin:/usr/local/bin
+Environment=PORT=3000
+
+# Environment file containing secrets
+EnvironmentFile=/opt/file-sharing/.env
+
+ExecStart=/usr/bin/npm run start
+Restart=always
+RestartSec=10
+
+# Security measures
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target 

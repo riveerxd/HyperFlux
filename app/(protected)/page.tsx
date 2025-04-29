@@ -19,17 +19,16 @@ export default function Home() {
   const [files, setFiles] = useState<TempFile[]>([]);
 
   return (
-    <div className="max-w-[80rem] mx-auto p-8">
+    <div className="max-w-4xl mx-auto p-8">
       <h1 className="text-3xl font-bold text-center mb-8">
         Temporary File Sharing
       </h1>
-      <div className="w-full">
-        <div className="space-y-8 w-full">
+      <div className="grid gap-8 md:grid-cols-2">
+        <div className="space-y-8">
           <FileUpload onFileUploaded={(newFile) => {
             if (isTempFile(newFile)) {
               setFiles(prev => [newFile, ...prev]);
             } else {
-              // Handle non-TempFile objects here
               console.error('Invalid file uploaded:', newFile);
             }
           }} />
