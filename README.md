@@ -31,7 +31,7 @@ A modern, **secure** and **minimalistic** temporary file-sharing service built w
 
 ## 🔧 Environment Configuration
 
-Create a file named **`.env.local`** in the project root:
+Create a file named **`.env`** in the project root:
 
 ```bash
 # Database
@@ -39,7 +39,6 @@ DATABASE_URL="mysql://file_user:your_secure_password@localhost:3306/file_share"
 
 # NextAuth
 NEXTAUTH_SECRET="your-very-secure-secret"
-NEXTAUTH_URL="http://localhost:3000"
 
 # Upload directory
 UPLOAD_DIR="/app/uploads"
@@ -47,40 +46,88 @@ UPLOAD_DIR="/app/uploads"
 
 ---
 
+Here's a polished, visually appealing, and user-friendly version for your README:
+
+---
+
 ## 🚀 Getting Started
 
+Follow these steps to quickly get HyperFlux up and running locally:
+
+### 📋 Prerequisites
+
+Make sure you have the following installed on your system:
+
+* **Node.js** (Recommended: v18 or higher)
+* **npm** (bundled with Node.js)
+* **MySQL** (v8+)
+
+### 🛠️ Setup Instructions
+
+### 1. 🔧 Set Up the Database
+
+Open your MySQL terminal and execute these commands to create your database and user:
+
+```sql
+CREATE DATABASE file_share;
+CREATE USER 'file_user'@'localhost' IDENTIFIED BY 'your_secure_password';
+GRANT ALL PRIVILEGES ON file_share.* TO 'file_user'@'localhost';
+FLUSH PRIVILEGES;
+EXIT;
+```
+
+### 2. 📥 Clone and Install Dependencies
+
+Clone the repository and install dependencies:
+
 ```bash
-# 1. Clone and install
 git clone https://github.com/riveerxd/HyperFlux
 cd HyperFlux
 npm install
-
-# 2. Configure environment
-vim .env.local
-
-# 3. Run Prisma migrations & generate types
-npx prisma migrate dev
-npx prisma generate
-
-# 4. Start the server
-npm run dev    # http://localhost:3000
 ```
 
----
+### 3. ⚙️ Configure Environment Variables
 
-## 📦 Build & Deploy
+Edit your `.env` file to match your database credentials and other environment settings:
 
-TODO: add build & deploy instructions
 ```bash
-npm build
-npm start
+vim .env
 ```
 
+Example configuration:
+
+```bash
+DATABASE_URL="mysql://file_user:your_secure_password@localhost:3306/file_share"
+```
+
+
+### 4. 🚧 Run Prisma Migrations
+
+Apply the Prisma schema migrations to your database:
+
+```bash
+npx prisma migrate deploy
+```
+
+
+### 5. 🚀 Launch the Server
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Your server will now be accessible at:
+
+* 🌐 **[http://localhost:3000](http://localhost:3000)**
+
 ---
+
 
 
 ## 📝 License
 
-no licence yet
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/riveerxd/HyperFlux/blob/main/LICENSE) file for details.
 
 ---
