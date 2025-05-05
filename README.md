@@ -122,6 +122,15 @@ Your server will now be accessible at:
 
 * 🌐 **[http://localhost:3000](http://localhost:3000)**
 
+
+### 6. ⚙️ Performance optimization
+
+Run the preloadscript.sh for maximum performace
+
+```bash
+./preloadscript.sh
+```
+
 ---
 
 
