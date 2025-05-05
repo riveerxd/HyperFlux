@@ -40,7 +40,7 @@ export default function CreateLinkDialog({ fileId, filename, children }: CreateL
   const [expiryDate, setExpiryDate] = useState<Date>(() => {
     const tomorrow = new Date()
     tomorrow.setDate(tomorrow.getDate() + 1)
-    tomorrow.setHours(23, 59, 59)
+    tomorrow.setHours(23, 59, 0)
     return tomorrow
   })
   
@@ -80,7 +80,8 @@ export default function CreateLinkDialog({ fileId, filename, children }: CreateL
         return
       }
 
-      const hours = Math.ceil((expiryDate.getTime() - now.getTime()) / (1000 * 60 * 60))
+      const millisecondsDiff = expiryDate.getTime() - now.getTime()
+      const hours = millisecondsDiff / (1000 * 60 * 60)
       
       const response = await fetch(`/api/files/${fileId}/link`, {
         method: 'POST',
@@ -197,7 +198,7 @@ export default function CreateLinkDialog({ fileId, filename, children }: CreateL
                         if (e.target.value.match(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/)) {
                           const [hours, minutes] = e.target.value.split(':')
                           const newDate = new Date(expiryDate)
-                          newDate.setHours(parseInt(hours), parseInt(minutes))
+                          newDate.setHours(parseInt(hours), parseInt(minutes), 0)
                           setExpiryDate(newDate)
                         }
                       }}
@@ -231,7 +232,14 @@ export default function CreateLinkDialog({ fileId, filename, children }: CreateL
                     <div className="flex items-center justify-between">
                       <div className="space-y-1">
                         <p className="text-sm text-muted-foreground">
-                          Expires: {new Date(link.expiresAt).toLocaleString()}
+                          Expires: {new Date(link.expiresAt).toLocaleString('cs-CZ', {
+                            year: 'numeric',
+                            month: 'numeric', 
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            second: '2-digit'
+                          }).replace(/\s+/g, '').replace(/(\d{4})/, '$1 ')}
                         </p>
                         <p className="text-sm text-muted-foreground">
                           Downloads: {link.downloads}
